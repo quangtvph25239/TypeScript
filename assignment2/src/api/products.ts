@@ -15,3 +15,6 @@ export const update = (id: string, body: updateForm) => {
     const uri = "/products/" + id
     return instance.put(uri, body)
 }
+export const deleteProducts = (id:string) => {
+    return instance.delete(`/products/${id}`,)
+}

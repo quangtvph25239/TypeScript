@@ -7,8 +7,7 @@ const UserHeader = () => {
         <div className="container mx-auto flex gap-4 items-center">
             <img className="w-[50px] ml-[90px]" src="/logo.png" alt="" />
             <input className="w-[1050px] rounded-2xl" type="text" placeholder="Search"/>
-            <a href="/signup">Login</a>
-            <a href="">Logout</a>
+            <a href="/signin">Login</a>
             <p className="text-white">Xin chào: {user && user.lastName}</p>
         </div>
     </header>

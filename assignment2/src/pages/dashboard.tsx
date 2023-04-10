@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react"
-import { Link } from 'react-router-dom'
+import { Link, useParams} from "react-router-dom";
+// import SidebarMenu from "../components/SidebarMenu";
+import {getAll } from "../api/products";
+import { useEffect, useState } from "react";
+import { IProduct } from "../models";
 
-import { getAll } from "../api/products"
-import { IProduct } from "../models"
-
-const Dashboard = () => {
+const Dashboard = (props) => {
     const [products, setProducts] = useState<IProduct[]>([])
 
     const fetchProducts = async () => {
-        const { data } = await getAll()
-        setProducts(data)
-    }
+        try {
+          const { data } = await getAll();
+          setProducts(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    const removeProduct = (id: IProduct) => {
+        props.onRemove(id);
+      };
 
     useEffect(() => {
         fetchProducts()
@@ -61,10 +68,13 @@ const Dashboard = () => {
                             <td className="whitespace-nowrap px-4 py-2 text-gray-700">{product.price}</td>
                             <td className="whitespace-nowrap px-4 py-2 text-gray-700">{product.original_price}</td>
                             <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                <img className="w-[80%]" src={product.images?.[0].base_url} alt="" />
+                                <img className="w-[80%]" src={product.images?.[0].small_url} alt="" />
                             </td>
                             <td className="text-center">
-                                <button className="bg-red-600 text-white rounded-md p-2">Xoá</button>
+                                {/* <button className="bg-red-600 text-white rounded-md p-2" onClick={() => removeProduct(product.id)}>Xoá</button> */}
+                                <button className="px-3 py-[6.5px] ml-3 font-medium text-white bg-red-500 rounded-md shadow-red-500/50" onClick={() => removeProduct(product.id)}>
+                  Remove
+                </button>
                             </td>
                         </tr>
                     ))}

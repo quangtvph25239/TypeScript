@@ -3,7 +3,7 @@ import { IProduct } from "../models"
 import { useEffect, useState } from "react"
 import { getAll, getById } from "../api/products"
 import { Link } from 'react-router-dom'
-
+import { ISpecification } from '../models'
 
 const ProductDetail = () => {
     const {id} = useParams()
@@ -55,7 +55,8 @@ const ProductDetail = () => {
     
     <div className='border w-[1191px] h-[155px] bg-[#F2F2F2;]'>
         <h1 className='font-bold text-red-600'>Đặc điểm nổi bật</h1>
-        <h1 className=''>{product.brand}</h1>
+        <h1 className=''>{product?.description?.substring(50, 820)}</h1>
+        {/* <h1 className=''>{product?.specifications}</h1> */}
     </div>
     </div>
    
